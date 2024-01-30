@@ -1,0 +1,66 @@
+---
+# tasks file for lamp
+
+- name: Create /root/download directory
+  become: true
+  ansible.builtin.file:
+    path: /root/download
+    mode: '711'
+    state: directory
+
+- name: Download OpsGenie Lamp
+  become: true
+  ansible.builtin.get_url:
+    url: "https://github.com/opsgenie/opsgenie-lamp/releases/download/v{{ opsgenie_lamp_version }}/opsgenie-lamp_{{ opsgenie_lamp_version }}_linux_amd64.zip"
+    dest: "/root/download/opsgenie-lamp-{{ opsgenie_lamp_version }}.zip"
+    mode: '644'
+  register: lamp_downloaded
+
+- name: Create Lamp directory
+  become: true
+  ansible.builtin.file:
+    path: "/opt/lamp/{{ opsgenie_lamp_version }}"
+    mode: '755'
+    state: directory
+
+- name: Install packages
+  become: true
+  ansible.builtin.apt:
+    state: present
+    autoclean: true
+    update_cache: true
+    name:
+      - unzip
+
+- name: Extract and install lamp
+  become: true
+  ansible.builtin.unarchive:
+    src: "/root/download/opsgenie-lamp-{{ opsgenie_lamp_version }}.zip"
+    dest: "/opt/lamp/{{ opsgenie_lamp_version }}"
+    copy: false
+  when: lamp_downloaded.changed  # noqa: no-handler
+
+- name: Create link to bin
+  become: true
+  ansible.builtin.file:
+    src: "/opt/lamp/{{ opsgenie_lamp_version }}/opsgenie-lamp_v{{ opsgenie_lamp_version }}"
+    dest: "{{ lamp_bin_path }}"
+    state: link
+
+- name: Create Lamp configuration
+  become: true
+  ansible.builtin.template:
+    src: lamp.conf.j2
+    dest: /etc/lamp.conf
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Install monit2opsgenie.sh
+  become: true
+  ansible.builtin.copy:
+    src: files/monit2opsgenie.sh
+    dest: /usr/local/bin/monit2opsgenie.sh
+    owner: root
+    group: root
+    mode: '0755'

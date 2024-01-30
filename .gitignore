@@ -1,0 +1,11 @@
+.vagrant
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+.kitchen/
+kitchen.local.yml
+Session.vim
+*.pyc

@@ -1,0 +1,29 @@
+---
+galaxy_info:
+  role_name: lamp
+  namespace: alexd
+  author: Alex L. Demidov
+  description: Install OpsGenie Lamp
+
+  issue_tracker_url: https://github.com/AlexeyDemidov/lamp-ansible-role/issues
+
+  license: BSD-3-Clause
+
+  min_ansible_version: "2.1"
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+
+  galaxy_tags: []
+
+dependencies: []

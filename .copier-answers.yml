@@ -1,0 +1,9 @@
+---
+# Changes here will be overwritten by Copier
+_commit: '0.5'
+_src_path: /home/alexd/code/copier-ansible
+copyright_date: '2024'
+copyright_holder: Alex L. Demidov
+project_description: Install OpsGenie Lamp
+project_name: lamp
+

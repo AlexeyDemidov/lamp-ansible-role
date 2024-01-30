@@ -1,0 +1,107 @@
+---
+CommitMsg:
+  HardTabs:
+    enabled: true
+
+  CapitalizedSubject:
+    enabled: false
+  MessageFormat:
+    description: 'Check commit message matches expected pattern'
+    pattern: '^((feat|fix|build|docs|ci|style|refactor|perf|test|chore)(\((.+)\))?!?: (.+))'
+    expected_pattern_message: '<type>(<scope>): <Message Description>'
+    sample_message: 'fix(core): fix a bug'
+    enabled: true
+
+PreCommit:
+  ALL:
+    on_warn: fail
+  BundleAudit:
+    enabled: false
+  BundleCheck:
+    enabled: false
+  BundleOutdated:
+    enabled: false
+  ExecutePermissions:
+    enabled: true
+  Fasterer:
+    enabled: false
+  FixMe:
+    enabled: false
+  Flay:
+    enabled: false
+  ForbiddenBranches:
+    enabled: false
+    branch_patterns: ['master']
+  Hadolint:
+    enabled: true
+  HamlLint:
+    enabled: false
+  HardTabs:
+    enabled: true
+  LicenseFinder:
+    enabled: true
+  LicenseHeader:
+    enabled: false
+  LocalPathsInGemfile:
+    enabled: false
+  Pronto:
+    enabled: false
+  RailsBestPractices:
+    enabled: false
+  RailsSchemaUpToDate:
+    enabled: false
+  Reek:
+    enabled: false
+  RuboCop:
+    enabled: false
+  ShellCheck:
+    enabled: true
+  TrailingWhitespace:
+    enabled: true
+  LineEndings:
+    enabled: true
+  YamlLint:
+    flags: ['--format=parsable']
+    enabled: true
+    exclude:
+      - kitchen.yml
+      - .copier-answers.yml
+      - '**/.copier-answers.yml'
+  Foodcritic:
+    enabled: false
+  BerksfileCheck:
+    enabled: false
+  CookStyle:
+    enabled: false
+  GitLeaks:
+    enabled: true
+    required_executable: 'gitleaks'
+    flags: ['protect', '-v', '--staged']
+  AnsibleLint:
+    enabled: true
+    required_executable: 'ansible-lint'
+
+PrePush:
+  ProtectedBranches:
+    enabled: false
+    branches: ['master']
+  Brakeman:
+    enabled: false
+  RSpec:
+    enabled: false
+
+PreRebase:
+  MergedCommits:
+    enabled: false
+
+PostCheckout:
+  BundleInstall:
+    enabled: false
+
+PostMerge:
+  BundleInstall:
+    enabled: false
+
+PostRewrite:
+  BundleInstall:
+    enabled: false

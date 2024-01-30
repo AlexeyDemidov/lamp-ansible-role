@@ -1,0 +1,8 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: debian11
+    image: debian:bullseye
+verifier:
+  name: testinfra
